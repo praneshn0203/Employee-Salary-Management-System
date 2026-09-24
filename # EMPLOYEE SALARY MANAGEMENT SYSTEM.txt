@@ -1,0 +1,140 @@
+# EMPLOYEE SALARY MANAGEMENT SYSTEM
+
+employees = []
+
+
+def add_employee():
+    emp_id = input("Enter Employee ID: ")
+    name = input("Enter Employee Name: ")
+    department = input("Enter Department: ")
+    designation = input("Enter Designation: ")
+
+    employee = {
+        "id": emp_id,
+        "name": name,
+        "department": department,
+        "designation": designation,
+        "salary": 0,
+        "attendance": 0,
+        "absent": 0
+    }
+
+    employees.append(employee)
+    print("Employee added successfully!")
+
+
+def view_employees():
+    if len(employees) == 0:
+        print("No employees found.")
+        return
+
+    for e in employees:
+        print("\nEmployee ID:", e["id"])
+        print("Name:", e["name"])
+        print("Department:", e["department"])
+        print("Designation:", e["designation"])
+        print("Salary:", e["salary"])
+        print("Working Days:", e["attendance"])
+        print("Absent Days:", e["absent"])
+
+
+def calculate_salary():
+    emp_id = input("Enter Employee ID: ")
+
+    for e in employees:
+        if e["id"] == emp_id:
+
+            basic = float(input("Enter Basic Salary: "))
+            allowance = float(input("Enter Allowance: "))
+            overtime = float(input("Enter Overtime Amount: "))
+            bonus = float(input("Enter Bonus: "))
+            deduction = float(input("Enter Deductions: "))
+
+            gross = basic + allowance + overtime + bonus
+            net = gross - deduction
+
+            e["salary"] = net
+
+            print("\n----- SALARY DETAILS -----")
+            print("Basic Salary:", basic)
+            print("Allowance:", allowance)
+            print("Overtime:", overtime)
+            print("Bonus:", bonus)
+            print("Gross Salary:", gross)
+            print("Deductions:", deduction)
+            print("Net Salary:", net)
+
+            return
+
+    print("Employee not found.")
+
+
+def record_attendance():
+    emp_id = input("Enter Employee ID: ")
+
+    for e in employees:
+        if e["id"] == emp_id:
+
+            working = int(input("Enter Working Days: "))
+            absent = int(input("Enter Absent/Leave Days: "))
+
+            e["attendance"] = working
+            e["absent"] = absent
+
+            print("Attendance recorded successfully!")
+            return
+
+    print("Employee not found.")
+
+
+def search_employee():
+    emp_id = input("Enter Employee ID: ")
+
+    for e in employees:
+        if e["id"] == emp_id:
+            print("\nEmployee Found")
+            print("ID:", e["id"])
+            print("Name:", e["name"])
+            print("Department:", e["department"])
+            print("Designation:", e["designation"])
+            print("Salary:", e["salary"])
+            return
+
+    print("Employee not found.")
+
+
+while True:
+
+    print("\n================================")
+    print(" EMPLOYEE SALARY MANAGEMENT SYSTEM")
+    print("================================")
+    print("1. Add Employee")
+    print("2. View Employees")
+    print("3. Search Employee")
+    print("4. Record Attendance")
+    print("5. Calculate Salary")
+    print("6. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        add_employee()
+
+    elif choice == "2":
+        view_employees()
+
+    elif choice == "3":
+        search_employee()
+
+    elif choice == "4":
+        record_attendance()
+
+    elif choice == "5":
+        calculate_salary()
+
+    elif choice == "6":
+        print("Thank you!")
+        break
+
+    else:
+        print("Invalid choice!")
